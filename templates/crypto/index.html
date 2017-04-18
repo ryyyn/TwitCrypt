@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>ShareCrypt</title>
-</head>
-<body>
-<h1>TwitCrypt</h1>
-<p>TwitCrypt is for public private communications. Provide a password and message, and you'll get a secret message to
+{% extends 'crypto/base.html' %}
+
+{% block content %}
+    <h1>TwitCrypt</h1>
+    <p>TwitCrypt is for public private communications. Provide a password and message, and you'll get a secret message to
     tweet (or share) whenever you like. Only someone with the password can decrypt it on this site. The password is
     <b>not</b> the key used for encryption, and your message is <b>not</b> stored anywhere.
 
+    <a href="encrypt">
 
-<p>This is a dummy system and is not fully implemented. If you've found this page, please do not use this for information you wish to be securely encrypted.</p>
 
-</body>
-</html>
+    <p>This is a dummy system and is not fully implemented. If you've found this page, please do not use this for
+        information you wish to be securely encrypted.</p>
+
+{% endblock %}

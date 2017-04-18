@@ -17,6 +17,7 @@ class EncryptView(generic.DetailView):
     template_name = 'crypto/encrypt.html'
 
 '''
+
 def home(request):
     return render(request, 'crypto/index.html')
 

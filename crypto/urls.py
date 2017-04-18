@@ -9,6 +9,3 @@ urlpatterns = [
     url(r'^decrypt/', views.decrypt, name='decrypt'),
 ]
 
-# ignore these comments:
-#    might need replacement elsewhere for 'app_name=' to resolve namespace??
-#    refactor as crypto/urls.py if necessary

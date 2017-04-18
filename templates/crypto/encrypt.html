@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>TwitCrypt</title>
-</head>
-<body>
-<h1>Encrypt</h1>
-will be able to decrypt it on this site. The message is <b>not</b> saved on the
-server. This site uses one-time pads, the most secure cryptosystem.
-After your message is accessed once, the password and the OTP are destroyed.</p>
+{% extends 'crypto/base.html' %}
+
+{% block content %}
+    <h1>Encrypt</h1>
+    <p>will be able to decrypt it on this site. The message is <b>not</b> saved on the
+        server. This site uses one-time pads, the most secure cryptosystem.
+        After your message is accessed once, the password and the OTP are destroyed.</p>
 
 
-</body>
-</html>
+{% endblock %}
