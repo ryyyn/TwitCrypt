@@ -1,8 +1,10 @@
 from django.shortcuts import render
-
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
+from .forms import MessageForm
 from .models import Auth
+
+
 
 '''
 class IndexView(generic.View):
@@ -17,6 +19,23 @@ class EncryptView(generic.DetailView):
     template_name = 'crypto/encrypt.html'
 
 '''
+
+
+def get_message(request):
+    if request.method == 'POST':
+        # create form instance and populate it with request data
+        form = MessageForm(request.POST)
+
+        if form.is_valid():
+            # process
+
+            return HttpResponseRedirect('/ok/')
+
+    else:
+        form = MessageForm()
+
+    return render(request, 'encrypt.html', {'form': form})
+
 
 def home(request):
     return render(request, 'crypto/index.html')

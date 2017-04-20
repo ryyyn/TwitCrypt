@@ -1,10 +1,44 @@
 {% extends 'crypto/base.html' %}
 
 {% block content %}
-    <h1>Encrypt</h1>
-    <p>will be able to decrypt it on this site. The message is <b>not</b> saved on the
-        server. This site uses one-time pads, the most secure cryptosystem.
+  <h1>Encrypt</h1>
+  <p>This site uses one-time pads, the most secure cryptosystem.
         After your message is accessed once, the password and the OTP are destroyed.</p>
+
+  <br>
+  <br>
+<!--
+  <form action="/message/" method="post">
+     { % csrf_token %}
+     { { form.as_p }}
+    <input type="submit" value="Submit" />
+  </form>
+-->
+
+<form action="{{ action }}" method="POST">
+  {% csrf_token %}
+  {% if form.non_field_errors %}
+    <ul>
+      {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {% for field in form %}
+  <div id="{{ field.auto_id }}_container">
+    {{ field.help_text }}
+    <div>
+      {{ field.label_tag }} {{ field }}
+    </div>
+    <div id="{{ field.auto_id }}_errors">
+      {{ field.errors }}
+    </div>
+  </div>
+  {% endfor %}
+
+  <input id="save_contact" type="submit" value="Save" />
+</form>
+
 
 
 {% endblock %}
