@@ -1,7 +1,5 @@
+# from django import forms
 from django.contrib import admin
+from crypto.models import CodeRecord
 
-from .models import Auth
-
-# add database inspection/moderation functionality
-
-admin.site.register(Auth)
+admin.site.register(CodeRecord)

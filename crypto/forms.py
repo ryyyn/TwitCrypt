@@ -1,11 +1,11 @@
 from django import forms
+from crypto.models import CodeRecord
 
-#from .models import
+
+class CodeRecordForm(forms.ModelForm):
+    class Meta:
+        model = CodeRecord
+        fields = ['code', 'password'] #and not 'otp', 'exp_time'
 
 
-class MessageForm(forms.Form):
-    message = forms.CharField(label="message", max_length=140)
-
-    #class Meta:
-    #    model = Contact
 

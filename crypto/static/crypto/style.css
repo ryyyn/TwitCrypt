@@ -244,7 +244,7 @@ input[type="button"].button-big:focus {
 
 
 /* Forms
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
+––––––––––––––––––––––––––––––––––––––––––––––––––     */
 input[type="email"],
 input[type="number"],
 input[type="search"],
@@ -261,7 +261,7 @@ select {
   border-radius: 4px;
   box-shadow: none;
   box-sizing: border-box; }
-/* Removes awkward default styles on some inputs for iOS */
+/* Removes awkward default styles on some inputs for iOS  */
 input[type="email"],
 input[type="number"],
 input[type="search"],

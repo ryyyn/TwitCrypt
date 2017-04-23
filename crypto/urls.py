@@ -7,6 +7,5 @@ urlpatterns = [
     url(r'^$', views.home, name='crypto-home'),
     url(r'^encrypt/', views.encrypt, name='crypto-encrypt'),
     url(r'^decrypt/', views.decrypt, name='crypto-decrypt'),
-    url(r'^message/', views.get_message, name='crypto-message'),
+    url(r'^message/', views.disp_message, name='crypto-message'),
 ]
-
