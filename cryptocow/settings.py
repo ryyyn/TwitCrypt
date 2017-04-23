@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'twitcrypt.urls'
+ROOT_URLCONF = 'cryptocow.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'twitcrypt.wsgi.application'
+WSGI_APPLICATION = 'cryptocow.wsgi.application'
 
 
 # Database
