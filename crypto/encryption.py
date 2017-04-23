@@ -5,9 +5,10 @@ MESSAGE_LEN = 140
 
 def gen_otp():
     """
-    :return: a list of random integers of length MESSAGE_LEN to be used as a one time pad
+    :return: a string of comma delimited random integers of length MESSAGE_LEN 
+             to be used as a one time pad and for storage in the database
     """
-    return [secrets.randbelow(94) for n in range(MESSAGE_LEN)]
+    return ','.join(str(secrets.randbelow(94)) for n in range(MESSAGE_LEN))
 
 
 def format_text(text):
@@ -26,17 +27,18 @@ def format_text(text):
         raise
 
     # handle tabs?
-    # text += ' '*(MESSAGE_LEN - len(text))
     return [ord(ch)-ord(' ') for ch in text]
 
 
 def encrypt(message, otp):
     """
     :param message: an ASCII string to be encrypted
-    :param otp: a one time pad
+    :param otp: an ASCII string that represents a one time pad
     :return: an encrypted ASCII string
     """
     formatted = format_text(message)
+    otp = [int(n) for n in otp.split(',')]
+
     return ''.join(
         chr(((m_ch + otp_ch) % 94) + ord('!'))
         for m_ch, otp_ch in zip(formatted, otp)
@@ -49,14 +51,10 @@ def decrypt(code, otp):
     :param otp: the one time pad used to encrypt the code. result will be nonsense if the incorrect OTP is used
     :return: the message--the decrypted ASCII string
     """
-    code = [ord(ch)-ord('!') for ch in code]
+    code_arr = [ord(ch)-ord('!') for ch in code]
+    otp = [int(n) for n in otp.split(',')]
+
     return ''.join(
-        chr(((c_ch - otp_ch) % 94) + ord(' '))
-        for c_ch, otp_ch in zip(code, otp)
+        chr(((c - o) % 94) + ord(' '))
+        for c, o in zip(code_arr, otp)
     )
-
-
-
-
-
-

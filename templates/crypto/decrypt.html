@@ -1,9 +1,9 @@
 {% extends 'crypto/base.html' %}
 
 {% block content %}
-    <h1>Decrypt</h1>
+    <h3>Decrypt</h3>
   <p>Enter a coded message and its password.</p>
-  <form action="." method="post"><!--change action to /other_html_name? in order to redirect-->
+  <form action="." method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Submit" />

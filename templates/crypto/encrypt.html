@@ -1,7 +1,7 @@
 {% extends 'crypto/base.html' %}
 
 {% block content %}
-  <h1>Encrypt</h1>
+  <h3>Encrypt</h3>
   <p>This site uses one-time pads, the most secure cryptosystem.
         After your message is accessed once, the password and the OTP are destroyed.</p>
 
@@ -13,7 +13,5 @@
     {{ form.as_p }}
     <input type="submit" value="Submit" />
   </form>
-
-
 
 {% endblock %}

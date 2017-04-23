@@ -1,10 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-# from django.contrib.auth import authenticate
-# from django.contrib.auth.forms import AuthenticationForm
+from django.core.exceptions import ObjectDoesNotExist
+from crypto.forms import CodeRecordForm, ValidateForm
 from crypto.models import CodeRecord
-
-from crypto.forms import CodeRecordForm
 
 import encryption
 
@@ -20,21 +18,24 @@ def home(request):
 def encrypt(request):
     if request.method == 'POST':
         # create form instance and populate it with request data
-        form = CodeRecordForm(request.POST)
-
+        form = CodeRecordForm(data=request.POST)
         if form.is_valid():
-            # process
             message = form.cleaned_data['code']
             # exp_time = form.cleaned_data['exp_time']
             otp = encryption.gen_otp()
             code = encryption.encrypt(message, otp)
-            print(message, code)
             CodeRecord.objects.create(code=code, otp=otp,
                                       password=form.cleaned_data['password']
                                       )
-
-            return HttpResponseRedirect('/message/') # pass encoded text
-
+            context = {
+                'intro_text': "<p>Your secret message. Anyone with the password can decrypt it.</p>",
+                'message': code,
+            }
+            return render(
+                request,
+                'crypto/message.html',
+                context
+            )
     else:
         form = CodeRecordForm()
 
@@ -44,23 +45,28 @@ def encrypt(request):
 def decrypt(request):
     if request.method == 'POST':
         # create form instance and populate it with request data
-        form = CodeRecordForm()
-
+        form = ValidateForm(data=request.POST)
         if form.is_valid():
-
-            validate = False
-            CodeRecord.objects.get(code=form.cleaned_data['code'],
-                                   password=form.cleaned_data['password']
-                                   )
-
-
-            if validate is not None:
-                return HttpResponseRedirect('/message/')
-
+            code = form.cleaned_data['code']
+            try:
+                code_rec = CodeRecord.objects.get(code=code,
+                                                  password=form.cleaned_data['password']
+                                                  )
+            except ObjectDoesNotExist:
+                print("No record found")
+                return HttpResponseRedirect('crypto.decrypt.html')
             else:
-                return HttpResponseRedirect('/encrypt/')
+                context = {
+                    'intro_text': "<p>Decrypted message:</p>",
+                    'message': encryption.decrypt(code, code_rec.otp),
+                }
+                return render(
+                        request,
+                        'crypto/message.html',
+                        context,
+                )
     else:
-        form = CodeRecordForm()
+        form = ValidateForm()
 
     return render(request, 'crypto/decrypt.html', {'form': form})
 

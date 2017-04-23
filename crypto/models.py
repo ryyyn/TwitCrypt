@@ -7,7 +7,6 @@ class CodeRecord(models.Model):
     code = models.CharField(
         verbose_name="Text",
         max_length=140,
-        unique=True
     )
     password = models.CharField(max_length=100)
     otp = models.CharField(max_length=1000)
