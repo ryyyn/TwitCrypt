@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'cryptocow.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'cryptodb'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'cryptodb',
+        'USER': 'ryan',
+        'PASSWORD': 'ilikedata777',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
